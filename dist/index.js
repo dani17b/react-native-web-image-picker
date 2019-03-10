@@ -8,8 +8,23 @@ export class ImagePicker extends Component {
 
     this.state = {
       file : null,
-      preview : null
+      preview : typeof this.props.defaultImage != "undefined" ? this.props.defaultImage : null
     }
+  }
+
+  componentWillReceiveProps(props){
+    if(typeof props.defaultImage != "undefined" && props.defaultImage != null && this.props.defaultImage == null){
+      this.setState({
+        preview : props.defaultImage
+      })
+    }
+  }
+
+  reset(){
+    this.setState({
+      file : null,
+      preview : null
+    })
   }
 
   imageAttached(){
